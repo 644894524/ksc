@@ -21,6 +21,13 @@ func RoutersInit() {
 	// 监控配置文件变化
 	viper.WatchConfig()
 
+	//设置gin模式
+	if viper.GetString("env") == "prod" {
+		gin.SetMode(gin.ReleaseMode)
+	}else{
+		gin.SetMode(gin.DebugMode)
+	}
+
 	r := gin.Default()
 
 	//性能分析工具
@@ -37,10 +44,15 @@ func RoutersInit() {
 	r.Use(xssMdlwr.RemoveXss())
 
 	//用户相关模块
-	userModule(r)
+	initMoudle(r)
 
 	//监听端口默认为8080
 	r.Run(":8000")
+}
+
+//初始化路由
+func initMoudle(app *gin.Engine){
+	userModule(app)
 }
 
 
