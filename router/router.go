@@ -1,12 +1,12 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
-	"ksc/actions"
-	"github.com/gin-contrib/cors"
 	"github.com/dvwright/xss-mw"
-	"github.com/spf13/viper"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/pprof"
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+	"ksc/controller"
 )
 
 func RoutersInit() {
@@ -40,7 +40,7 @@ func RoutersInit() {
 	//用户相关模块
 	us := r.Group("user")
 	{
-		us.GET("/UserInfo", actions.UserInfo)
+		us.GET("/UserInfo", controller.UserInfo)
 	}
 
 	//监听端口默认为8080
