@@ -6,7 +6,6 @@ import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"ksc/controller"
 )
 
 func RoutersInit() {
@@ -38,10 +37,7 @@ func RoutersInit() {
 	r.Use(xssMdlwr.RemoveXss())
 
 	//用户相关模块
-	us := r.Group("user")
-	{
-		us.GET("/UserInfo", controller.UserInfo)
-	}
+	userModule(r)
 
 	//监听端口默认为8080
 	r.Run(":8000")
