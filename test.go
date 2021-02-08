@@ -6,8 +6,8 @@ import (
 )
 
 type User struct {
-	Uid  	 int
-	Name 	 string
+	Uid  	 int `json:"uid"`
+	Name 	 string `json:"name"`
 	Age  	 int
 	ClassId  int
 	SchoolId int

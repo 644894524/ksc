@@ -1,3 +1,19 @@
 site:
   domain: "http://myksc.cn"
   env: "dev"
+
+dev:
+  mysql:
+    hostname: "localhost"
+    port: "3306"
+    dbuser: "root"
+    dbpwd: "root"
+    dbname: "ksc"
+
+prod:
+  mysql:
+    hostname: "localhost"
+    port: "3306"
+    dbuser: "root"
+    dbpwd: "root"
+    dbname: "ksc"
