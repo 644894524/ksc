@@ -28,7 +28,11 @@ func RoutersInit() {
 		gin.SetMode(gin.DebugMode)
 	}
 
+	//启动带有中间件的路由：Logger、Recovery 中间件
 	r := gin.Default()
+
+	//不启用中间件：
+	//r := gin.New()
 
 	//性能分析工具
 	pprof.Register(r, "pprof")
