@@ -82,4 +82,8 @@ func initMoudle(app *gin.Engine){
 	userModule(app)
 }
 
+//初始化mysql
+func initMysql(app *gin.Engine){
+
+}
 
