@@ -19,17 +19,6 @@ const (
 
 func RoutersInit() {
 
-	//全局配置文件
-	viper.SetConfigFile("./config/conf.yaml")
-	viper.SetConfigType("yaml")
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic("读取配置文件失败")
-	}
-
-	// 监控配置文件变化
-	viper.WatchConfig()
-
 	//设置gin模式
 	if viper.GetString("env") == "prod" {
 		gin.SetMode(gin.ReleaseMode)
@@ -84,6 +73,19 @@ func initMoudle(app *gin.Engine){
 
 //初始化mysql
 func initMysql(app *gin.Engine){
+	//viper 初始化
+	viper.SetConfigFile("./config/conf.yaml")
+	viper.SetConfigType("yaml")
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic("读取配置文件失败")
+	}
+
+	// 监控配置文件变化
+	viper.WatchConfig()
+}
+
+func initViper(){
 
 }
 
