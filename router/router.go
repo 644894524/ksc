@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	WEBPORT          = ":8000"
+	WEB_PORT         = ":8000"
 	WEB_READTIMEOUT  = 3 * time.Second
 	WEB_WRITETIMEOUT = 3 * time.Second
 	WEB_MAXBYTES     = 1 << 20
@@ -61,13 +61,17 @@ func RoutersInit() {
 
 	//创建HTTP服务
 	server := &http.Server{
-		Addr:           WEBPORT,
+		Addr:           WEB_PORT,
 		Handler:        r,
 		ReadTimeout:    WEB_READTIMEOUT,
 		WriteTimeout:   WEB_WRITETIMEOUT,
 		MaxHeaderBytes: WEB_MAXBYTES,
 	}
-	server.ListenAndServe()
+
+	//启动server
+	if err := server.ListenAndServe(); err != nil {
+		panic(err)
+	}
 
 	//监听端口默认为8080
 	//r.Run(":8000")
