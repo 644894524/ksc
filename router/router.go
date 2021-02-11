@@ -6,6 +6,15 @@ import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"net/http"
+	"time"
+)
+
+const (
+	WEBPORT          = ":8000"
+	WEB_READTIMEOUT  = 3 * time.Second
+	WEB_WRITETIMEOUT = 3 * time.Second
+	WEB_MAXBYTES     = 1 << 20
 )
 
 func RoutersInit() {
@@ -50,8 +59,18 @@ func RoutersInit() {
 	//用户相关模块
 	initMoudle(r)
 
+	//创建HTTP服务
+	server := &http.Server{
+		Addr:           WEBPORT,
+		Handler:        r,
+		ReadTimeout:    WEB_READTIMEOUT,
+		WriteTimeout:   WEB_WRITETIMEOUT,
+		MaxHeaderBytes: WEB_MAXBYTES,
+	}
+	server.ListenAndServe()
+
 	//监听端口默认为8080
-	r.Run(":8000")
+	//r.Run(":8000")
 }
 
 //初始化路由
