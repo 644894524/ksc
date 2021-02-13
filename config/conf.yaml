@@ -2,18 +2,14 @@ site:
   domain: "http://myksc.cn"
   env: "dev"
 
-dev:
-  mysql:
-    hostname: "127.0.0.1"
-    port: "3306"
-    dbuser: "ksc"
-    dbpwd: "ksc"
-    dbname: "ksc"
-
-prod:
-  mysql:
-    hostname: "localhost"
-    port: "3306"
-    dbuser: "root"
-    dbpwd: "root"
-    dbname: "ksc"
+db:
+  drivername: "mysql"
+  hostname: "127.0.0.1"
+  port: "3306"
+  dbuser: "ksc"
+  dbpwd: "ksc"
+  dbname: "ksc"
+  chrset: "utf8"
+  lifetime: 5
+  maxconn: 500
+  idleconn: 100

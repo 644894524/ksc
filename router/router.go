@@ -15,13 +15,9 @@ const (
 	WEB_READTIMEOUT  = 3 * time.Second
 	WEB_WRITETIMEOUT = 3 * time.Second
 	WEB_MAXBYTES     = 1 << 20
-	WEB_CONFILE		 = "./config/conf.yaml"
-	WEB_CONFTYPE	 = "yaml"
 )
 
 func RoutersInit() {
-
-	initViper()
 
 	//设置gin模式
 	if viper.GetString("env") == "prod" {
@@ -73,22 +69,4 @@ func RoutersInit() {
 //初始化路由
 func initMoudle(app *gin.Engine){
 	userModule(app)
-}
-
-//初始化mysql
-func initMysql(app *gin.Engine){
-	
-}
-
-//viper 初始化
-func initViper(){
-	viper.SetConfigFile(WEB_CONFILE)
-	viper.SetConfigType(WEB_CONFTYPE)
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic("读取配置文件失败")
-	}
-
-	// 监控配置文件变化
-	viper.WatchConfig()
 }
