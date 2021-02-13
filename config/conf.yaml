@@ -9,7 +9,7 @@ db:
   dbuser: "ksc"
   dbpwd: "ksc"
   dbname: "ksc"
-  chrset: "utf8"
+  charset: "utf8"
   lifetime: 5
   maxconn: 500
   idleconn: 100
