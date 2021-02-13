@@ -69,4 +69,5 @@ func RoutersInit() {
 //初始化路由
 func initMoudle(app *gin.Engine){
 	userModule(app)
+	newsModule(app)
 }
