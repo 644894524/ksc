@@ -77,7 +77,7 @@ func initMoudle(app *gin.Engine){
 
 //初始化mysql
 func initMysql(app *gin.Engine){
-
+	
 }
 
 //viper 初始化
@@ -92,4 +92,3 @@ func initViper(){
 	// 监控配置文件变化
 	viper.WatchConfig()
 }
-
