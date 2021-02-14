@@ -1,4 +1,4 @@
-package news
+package article
 
 import (
 	"github.com/gin-gonic/gin"
