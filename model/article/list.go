@@ -12,6 +12,6 @@ func List(page int){
 	offset := page * LIMIT
 	var articles data.Article
 	db := common.GetDb()
-	db.Where("status = ?", 0).Order("update_time DESC").Offset(offset).Limit(10).Find(&articles)
+	db.Where("status = ?", 0).Order("update_time DESC").Offset(offset).Limit(LIMIT).Find(&articles)
 	fmt.Println(articles)
 }
