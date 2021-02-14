@@ -13,5 +13,5 @@ func List(page int){
 	var articles []data.Article
 	db := common.GetDb()
 	db.Where("status = ?", 0).Order("update_time DESC").Offset(offset).Limit(LIMIT).Find(&articles)
-	fmt.Println(articles)
+	fmt.Println(articles[0].CreateTime)
 }
