@@ -5,7 +5,7 @@ import (
 	"ksc/controller/article"
 )
 
-func newsModule(app *gin.Engine) *gin.Engine {
+func articleModule(app *gin.Engine) *gin.Engine {
 	us := app.Group("article")
 	{
 		us.GET("/List", article.List)
