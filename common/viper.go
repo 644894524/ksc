@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	WEB_CONFILE		 = "./config/conf.yaml"
+	WEB_CONFILE		 = "../config/conf.yaml"
 	WEB_CONFTYPE	 = "yaml"
 )
 
