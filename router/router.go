@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	WEB_PORT         = ":8000"
+	WEB_PORT         = ":80"
 	WEB_READTIMEOUT  = 3 * time.Second
 	WEB_WRITETIMEOUT = 3 * time.Second
 	WEB_MAXBYTES     = 1 << 20
