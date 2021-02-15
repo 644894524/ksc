@@ -29,6 +29,10 @@ func RoutersInit() {
 	//启动带有中间件的路由：Logger、Recovery 中间件
 	r := gin.Default()
 
+	//静态资源访问路径
+	r.Static("/public", "/workspace/webapps/ksc/ksc/public")
+	//r.StaticFile("/index.html", "./public/index.html")
+
 	//不启用中间件：
 	//r := gin.New()
 
@@ -44,10 +48,6 @@ func RoutersInit() {
 	//XSS过滤
 	var xssMdlwr xss.XssMw
 	r.Use(xssMdlwr.RemoveXss())
-
-	//静态资源访问路径
-	//r.StaticFile("/public", "/workspace/webapps/ksc/ksc/public")
-	r.StaticFile("/index.html", "./public/index.html")
 
 	//用户相关模块
 	initMoudle(r)
