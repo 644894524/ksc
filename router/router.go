@@ -46,7 +46,8 @@ func RoutersInit() {
 	r.Use(xssMdlwr.RemoveXss())
 
 	//静态资源访问路径
-	r.StaticFile("/public", "/workspace/webapps/ksc/ksc/public")
+	//r.StaticFile("/public", "/workspace/webapps/ksc/ksc/public")
+	r.StaticFile("/index.html", "./public/index.html")
 
 	//用户相关模块
 	initMoudle(r)
