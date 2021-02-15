@@ -1,12 +1,14 @@
 package router
 
 import (
+	"fmt"
 	"github.com/dvwright/xss-mw"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -30,11 +32,9 @@ func RoutersInit() {
 	r := gin.Default()
 
 	//静态资源访问路径
-	//r.Static("/public", "/workspace/webapps/ksc/ksc/public")
-	r.Static("/public", viper.GetString("site.static"))
-
-	//不启用中间件：
-	//r := gin.New()
+	currDir,_ := os.Getwd()
+	staticDir := fmt.Sprintf("%s%s", currDir, "/public")
+	r.Static("/public", staticDir)
 
 	//性能分析工具
 	pprof.Register(r, "pprof")
