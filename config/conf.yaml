@@ -1,6 +1,7 @@
 site:
   domain: "http://myksc.cn"
   env: "dev"
+  static: "./public"
 
 db:
   drivername: "mysql"

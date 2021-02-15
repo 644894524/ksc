@@ -45,6 +45,9 @@ func RoutersInit() {
 	var xssMdlwr xss.XssMw
 	r.Use(xssMdlwr.RemoveXss())
 
+	//静态资源访问路径
+	r.StaticFile("/public", viper.GetString("site.static"))
+
 	//用户相关模块
 	initMoudle(r)
 
