@@ -30,8 +30,8 @@ func RoutersInit() {
 	r := gin.Default()
 
 	//静态资源访问路径
-	r.Static("/public", "/workspace/webapps/ksc/ksc/public")
-	//r.StaticFile("/index.html", "./public/index.html")
+	//r.Static("/public", "/workspace/webapps/ksc/ksc/public")
+	r.Static("/public", viper.GetString("site.static"))
 
 	//不启用中间件：
 	//r := gin.New()
