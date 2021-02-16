@@ -13,7 +13,7 @@ func main() {
 	common.InitDb()
 
 	var mode string
-	flag.StringVar(&mode, "mode", "web", "task name")
+	flag.StringVar(&mode, "mode", "web", "startup mode")
 	flag.Parse()
 	initMode(mode)
 }
