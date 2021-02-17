@@ -1,6 +1,0 @@
-package script
-
-
-func reptile(){
-
-}
