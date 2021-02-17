@@ -43,9 +43,8 @@ func main(){
 					itemHref := itemV.ChildAttr("a[class='meiwen']", "href")
 					itemName := itemV.ChildText("a[class='meiwen']")
 					if itemName != "" && itemHref != ""{
-						fmt.Println(itemHref, itemName, csign)
+						//fmt.Println(itemHref, itemName, csign)
 						conUrl := fmt.Sprintf("%s%s", url, itemHref)
-						fmt.Println(conUrl)
 						con.Request("GET", conUrl, nil, nil, nil)
 					}
 				})
@@ -64,7 +63,7 @@ func main(){
 
 	//(内容)请求前调用
 	con.OnRequest(func(r *colly.Request) {
-		fmt.Println("con爬取：", r.URL)
+		//fmt.Println("con爬取：", r.URL)
 	})
 
 	//(内容)错误请求调用
@@ -76,7 +75,7 @@ func main(){
 	con.OnHTML("div[class='article']", func(art *colly.HTMLElement){
 		conDate  := art.ChildText("li[class='pubdate'] span")
 		conClick := art.ChildText("li[class='click'] span")
-		conImage := art.ChildAttr("div[class='arcpic'] img", "src")
+		conImage := art.ChildAttr("img", "src")
 		conArtic := art.ChildText("div[class='text'] p")
 		conTitle := art.ChildText("div[class='article'] h1")
 		fmt.Println(conTitle, conClick, conImage, conArtic, conDate)
