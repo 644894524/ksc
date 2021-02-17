@@ -12,6 +12,8 @@ type Article struct {
 	CreateTime  int			`gorm:"column:create_time" json:"create_time"`
 	UpdateTime	int         `grom:"column:update_time" json:"update_time"`
 	Status		int			`gorm:"column:status;default:0" json:"status"`
+	Content     string		`gorm:"column:content" json:"content"`
+	Imgs		string		`gorm:"column:imgs" json:"imgs"`
 }
 
 //表名

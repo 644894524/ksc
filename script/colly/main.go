@@ -72,13 +72,24 @@ func main(){
 	})
 
 	//(内容)
-	con.OnHTML("div[class='article']", func(art *colly.HTMLElement){
+	con.OnHTML("div[class='container']", func(art *colly.HTMLElement){
 		conDate  := art.ChildText("li[class='pubdate'] span")
 		conClick := art.ChildText("li[class='click'] span")
-		conImage := art.ChildAttr("img", "src")
 		conArtic := art.ChildText("div[class='text'] p")
 		conTitle := art.ChildText("div[class='article'] h1")
-		fmt.Println(conTitle, conClick, conImage, conArtic, conDate)
+
+		var conImages [4]string
+		var conImageInt int = 0
+
+		art.ForEach("ul[class='picture-list'] li", func(conInt int, conImage *colly.HTMLElement){
+			imageUrl := conImage.ChildAttr("a[class='meiwen'] img", "src")
+			if imageUrl != "" && conImageInt <= 3 {
+				conImages[conImageInt] = imageUrl
+				conImageInt++
+			}
+		})
+
+		fmt.Println(conTitle, conClick, conImages, conArtic, conDate)
 	})
 
 	err := index.Visit(url)
