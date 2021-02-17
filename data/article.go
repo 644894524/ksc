@@ -14,6 +14,8 @@ type Article struct {
 	Status		int			`gorm:"column:status;default:0" json:"status"`
 	Content     string		`gorm:"column:content" json:"content"`
 	Imgs		string		`gorm:"column:imgs" json:"imgs"`
+	TagId		int			`gorm:"column:tag_id" json:"tag_id"`
+	TagName     string		`gorm:"column:tag_name" json:"tag_name"`
 }
 
 //表名
