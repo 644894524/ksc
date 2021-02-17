@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 	"time"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var Db *gorm.DB

@@ -7,8 +7,8 @@ import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"ksc/util"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -19,10 +19,10 @@ const (
 	WEB_MAXBYTES     = 1 << 20
 )
 
-func RoutersInit() {
+func RoutersInit(currDir string) {
 
 	//设置gin模式
-	if viper.GetString("env") == "prod" {
+	if viper.GetString("site.env") == "prod" {
 		gin.SetMode(gin.ReleaseMode)
 	}else{
 		gin.SetMode(gin.DebugMode)
@@ -32,8 +32,8 @@ func RoutersInit() {
 	r := gin.Default()
 
 	//静态资源访问路径
-	currDir,_ := os.Getwd()
-	staticDir := fmt.Sprintf("%s%s", currDir, "/public")
+	staticDir := util.StringBuilder(util.StringBuilder(currDir, "public"))
+	fmt.Println(staticDir)
 	r.Static("/public", staticDir)
 
 	//性能分析工具

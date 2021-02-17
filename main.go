@@ -1,27 +1,16 @@
 package main
 
 import (
-	"flag"
-	_ "github.com/go-sql-driver/mysql"
 	"ksc/common"
 	"ksc/router"
-	"ksc/script"
+	"ksc/util"
+	"os"
 )
 
-func main() {
-	common.InitViper()
+func main(){
+	currDir, _ := os.Getwd()
+	appDir := util.StringBuilder(currDir, "/")
+	common.InitViper(appDir)
 	common.InitDb()
-
-	var mode string
-	flag.StringVar(&mode, "mode", "web", "startup mode")
-	flag.Parse()
-	initMode(mode)
-}
-
-func initMode(d string){
-	if d == "web" {
-		router.RoutersInit()
-	}else {
-		script.Task()
-	}
+	router.RoutersInit(appDir)
 }
