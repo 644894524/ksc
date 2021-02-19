@@ -6,22 +6,29 @@ import (
 	"time"
 )
 
+const URL = "http://www.enjoybar.com"
 
 func main(){
 	fmt.Println("start")
 
-	url := "http://www.enjoybar.com"
-
-	//配置
 	agent := colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36")
 	depth := colly.MaxDepth(1)
-
-	//首页爬取
 	index := colly.NewCollector(agent, depth)
 
-	//内容页爬取
-	con := index.Clone()
+	//con := index.Clone()
+	con := infoC(index.Clone())
 
+	index = indexC(index, con)
+	err := index.Visit(URL)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("End")
+}
+
+// indexC 首页爬取
+func indexC(index *colly.Collector, info *colly.Collector) *colly.Collector {
 	//请求前调用
 	index.OnRequest(func(r *colly.Request) {
 		fmt.Println("index爬取：", r.URL)
@@ -44,16 +51,21 @@ func main(){
 					itemName := itemV.ChildText("a[class='meiwen']")
 					if itemName != "" && itemHref != ""{
 						//fmt.Println(itemHref, itemName, csign)
-						conUrl := fmt.Sprintf("%s%s", url, itemHref)
-						con.Request("GET", conUrl, nil, nil, nil)
+						conUrl := fmt.Sprintf("%s%s", URL, itemHref)
+						info.Request("GET", conUrl, nil, nil, nil)
 					}
 				})
 			}
 		})
 	})
 
+	return index
+}
+
+// infoC 内容爬取
+func infoC(info *colly.Collector) *colly.Collector{
 	//限速
-	con.Limit(&colly.LimitRule{
+	info.Limit(&colly.LimitRule{
 		DomainRegexp: "",
 		DomainGlob:   "*.enjoybar.com/*",
 		Delay:        2 * time.Second,
@@ -62,17 +74,17 @@ func main(){
 	})
 
 	//(内容)请求前调用
-	con.OnRequest(func(r *colly.Request) {
+	info.OnRequest(func(r *colly.Request) {
 		//fmt.Println("con爬取：", r.URL)
 	})
 
 	//(内容)错误请求调用
-	con.OnError(func(r *colly.Response, err error) {
+	info.OnError(func(r *colly.Response, err error) {
 		fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
 	})
 
 	//(内容)
-	con.OnHTML("div[class='container']", func(art *colly.HTMLElement){
+	info.OnHTML("div[class='container']", func(art *colly.HTMLElement){
 		conDate  := art.ChildText("li[class='pubdate'] span")
 		conClick := art.ChildText("li[class='click'] span")
 		conArtic := art.ChildText("div[class='text'] p")
@@ -92,10 +104,5 @@ func main(){
 		fmt.Println(conTitle, conClick, conImages, conArtic, conDate)
 	})
 
-	err := index.Visit(url)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("End")
+	return info
 }
