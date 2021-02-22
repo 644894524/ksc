@@ -11,6 +11,8 @@ const URL = "http://www.enjoybar.com"
 func main(){
 	fmt.Println("start")
 
+
+	//爬虫
 	agent := colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36")
 	depth := colly.MaxDepth(1)
 	index := colly.NewCollector(agent, depth)
@@ -23,6 +25,9 @@ func main(){
 	if err != nil {
 		panic(err)
 	}
+
+	//数据库初始化
+
 
 	fmt.Println("End")
 }
@@ -105,4 +110,12 @@ func infoC(info *colly.Collector) *colly.Collector{
 	})
 
 	return info
+}
+
+func insertArticle(){
+
+}
+
+func insertTags(){
+
 }

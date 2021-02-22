@@ -10,6 +10,7 @@ const (
 	WEB_CONFTYPE	 = "yaml"
 )
 
+// InitViper
 func InitViper(appDir string){
 	file  := util.StringBuilder(appDir, WEB_CONFILE)
 	viper.SetConfigFile(file)
@@ -22,4 +23,3 @@ func InitViper(appDir string){
 	// 监控配置文件变化
 	viper.WatchConfig()
 }
-

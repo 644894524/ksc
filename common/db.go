@@ -8,8 +8,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var Db *gorm.DB
+var Ins *gorm.DB
 
+// InitDb c
 func InitDb(){
 	drivername := viper.GetString("db.drivername")
 	var args string
@@ -38,10 +39,10 @@ func InitDb(){
 	db.DB().SetConnMaxLifetime(time.Duration(viper.GetInt("db.lifetime")) * time.Second)
 	db.DB().SetMaxOpenConns(viper.GetInt("db.maxconn"))
 	db.DB().SetMaxIdleConns(viper.GetInt("db.idleconn"))
-	Db = db
+	Ins = db
 	return
 }
 
 func GetDb() *gorm.DB {
-	return Db
+	return Ins
 }
